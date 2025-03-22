@@ -68,8 +68,7 @@ const deleteRamen = (ramenId, ramenImage, deleteButton) => {
       // Remove the ramen image and delete button from the DOM
       ramenImage.remove();
       deleteButton.remove();
-    })
-    .catch((error) => console.error('Error deleting ramen:', error));
+    }) .catch((error) => console.error('Error deleting ramen:', error));
 };
 
 const displayRamens = (ramens) => {
@@ -80,7 +79,6 @@ const displayRamens = (ramens) => {
     const ramenImage = document.createElement('img');
     ramenImage.src = ramen.image;
     ramenImage.alt = ramen.name;
-
     // Add event listener to display ramen details when clicked
     ramenImage.addEventListener('click', () => handleClick(ramen));
 
@@ -94,9 +92,8 @@ const displayRamens = (ramens) => {
     // Append ramen image and delete button to the ramen menu
     ramenMenu.appendChild(ramenImage);
     ramenMenu.appendChild(deleteButton);
-  }); // Closing the forEach loop properly
-};
-
+  });
+}
 // Handle the form submission to update ramen details
 const addEditSubmitListener = () => {
   const editRamenForm = document.getElementById('edit-ramen');

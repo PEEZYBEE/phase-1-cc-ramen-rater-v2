@@ -15,7 +15,7 @@ const handleClick = (ramen) => {
   const editRamenForm = document.getElementById('edit-ramen');
   document.getElementById('new-rating').value = ramen.rating;
   document.getElementById('new-comment').value = ramen.comment;
-  editRamenForm.dataset.ramenId = ramen.id;
+  editRamenForm.dataset.ramenId = ramen.id; 
 };
 
 const addSubmitListener = () => {
@@ -94,7 +94,6 @@ const displayRamens = (ramens) => {
     // Append ramen image and delete button to the ramen menu
     ramenMenu.appendChild(ramenImage);
     ramenMenu.appendChild(deleteButton);
-  }); // Closing the forEach loop properly
 };
 
 // Handle the form submission to update ramen details

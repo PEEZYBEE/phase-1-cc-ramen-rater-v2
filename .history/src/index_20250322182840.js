@@ -94,9 +94,8 @@ const displayRamens = (ramens) => {
     // Append ramen image and delete button to the ramen menu
     ramenMenu.appendChild(ramenImage);
     ramenMenu.appendChild(deleteButton);
-  }); // Closing the forEach loop properly
-};
-
+});
+}
 // Handle the form submission to update ramen details
 const addEditSubmitListener = () => {
   const editRamenForm = document.getElementById('edit-ramen');

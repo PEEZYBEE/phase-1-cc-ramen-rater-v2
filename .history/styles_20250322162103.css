@@ -57,7 +57,7 @@ header {
 
 .name {
   bottom: 60px;
-  background-color: whitesmoke;
+  
 }
 
 .restaurant {
@@ -91,7 +91,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:active {
-  background-color: grey;
+  background-color: gray;
 }
 
 form h4 {

@@ -42,6 +42,9 @@ const addSubmitListener = () => {
       .then((response) => response.json())
       .then((ramen) => {
         const ramenMenu = document.getElementById('ramen-menu');
+        const ramenContainer = document.createElement('div');
+        ramenContainer.classList.add('ramen-container');
+
         const ramenImage = document.createElement('img');
         ramenImage.src = ramen.image;
         ramenImage.alt = ramen.name;
@@ -49,7 +52,19 @@ const addSubmitListener = () => {
         // Add event listener to new ramen image to show details on click
         ramenImage.addEventListener('click', () => handleClick(ramen));
 
-        ramenMenu.appendChild(ramenImage);
+        // Create the delete button for this ramen
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+
+        // Add event listener to delete the ramen
+        deleteButton.addEventListener('click', () => deleteRamen(ramen.id, ramenContainer));
+
+        // Append ramen image and delete button to the container
+        ramenContainer.appendChild(ramenImage);
+        ramenContainer.appendChild(deleteButton);
+
+        // Append the container to the ramen menu
+        ramenMenu.appendChild(ramenContainer);
 
         // Reset the form after submission
         newRamenForm.reset();
@@ -59,15 +74,14 @@ const addSubmitListener = () => {
 };
 
 // Move deleteRamen outside of displayRamens
-const deleteRamen = (ramenId, ramenImage, deleteButton) => {
+const deleteRamen = (ramenId, ramenContainer) => {
   // Send a DELETE request to the backend to remove the ramen
   fetch(`http://localhost:3000/ramens/${ramenId}`, {
     method: 'DELETE',
   })
     .then(() => {
-      // Remove the ramen image and delete button from the DOM
-      ramenImage.remove();
-      deleteButton.remove();
+      // Remove the ramen container from the DOM
+      ramenContainer.remove();
     })
     .catch((error) => console.error('Error deleting ramen:', error));
 };
@@ -77,10 +91,12 @@ const displayRamens = (ramens) => {
   ramenMenu.innerHTML = ''; // Clear previous content
 
   ramens.forEach((ramen) => {
+    const ramenContainer = document.createElement('div'); // Create a container for each ramen
+    ramenContainer.classList.add('ramen-container'); // Add a class for styling if needed
+
     const ramenImage = document.createElement('img');
     ramenImage.src = ramen.image;
     ramenImage.alt = ramen.name;
-
     // Add event listener to display ramen details when clicked
     ramenImage.addEventListener('click', () => handleClick(ramen));
 
@@ -89,12 +105,15 @@ const displayRamens = (ramens) => {
     deleteButton.textContent = 'Delete';
 
     // Add event listener to delete the ramen
-    deleteButton.addEventListener('click', () => deleteRamen(ramen.id, ramenImage, deleteButton));
+    deleteButton.addEventListener('click', () => deleteRamen(ramen.id, ramenContainer));
 
-    // Append ramen image and delete button to the ramen menu
-    ramenMenu.appendChild(ramenImage);
-    ramenMenu.appendChild(deleteButton);
-  }); // Closing the forEach loop properly
+    // Append ramen image and delete button to the container
+    ramenContainer.appendChild(ramenImage);
+    ramenContainer.appendChild(deleteButton);
+
+    // Append the container to the ramen menu
+    ramenMenu.appendChild(ramenContainer);
+  });
 };
 
 // Handle the form submission to update ramen details
@@ -145,12 +164,4 @@ const main = () => {
     .catch((error) => console.error('Error fetching ramens:', error));
 };
 
-document.addEventListener('DOMContentLoaded', main);
-
-// Export functions for testing
-export {
-  displayRamens,
-  addSubmitListener,
-  handleClick,
-  main,
-};
+document.addEventListener('DOMContentLoaded`, 
